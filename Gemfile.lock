@@ -51,6 +51,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    device (0.0.0)
     erb2haml (0.1.5)
       html2haml
     erubis (2.7.0)
@@ -180,6 +181,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
+  device
   erb2haml
   font-awesome-rails
   haml-rails
