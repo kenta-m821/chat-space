@@ -147,16 +147,13 @@
     }
     &__form{
       height: 90px;
-      width: 600px;
       box-sizing: border-box;
       padding: 20px 50px 20px 40px;
       background-color: #ddd;
 
       &__new-message{
         border: none;
-        float: left;
         height: 50px;
-        width: 510px;
         display: flex;
         line-height: 300%;
       
