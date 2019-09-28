@@ -3,14 +3,14 @@
     .chat-side__header
       .chat-side__header__box
         %p.chat-side__header__box__user-name
-          森川絢太
+          = current_user.name
         %ul.chat-side__header__box__menu
           %li.chat-side__header__box__menu__new-group
             =link_to "https://www.facebook.com/", class: "contents__btn" do
               = fa_icon "edit"
           %li.chat-side__header__box__menu__edit-user
-            =link_to "https://di-v.co.jp", class: "contents__btn" do
-              = fa_icon "cog"
+            =link_to edit_user_path(current_user) do
+              = fa_icon "cog", class: "icon"
     .chat-side__groups
       .chat-side__groups__group
         .chat-side__groups__group__group-name
