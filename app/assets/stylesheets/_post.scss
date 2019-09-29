@@ -86,53 +86,39 @@ a {
         }
       }
     }
-    &__form{
-      height: 90px;
+    .form {
+      background-color: #DDDDDD;
       box-sizing: border-box;
+      height: 90px;
       padding: 20px 50px 20px 40px;
-      background-color: #ddd;
-
-      &__new-message{
+      &__message {
         border: none;
+        float: left;
         height: 50px;
-        display: flex;
-        line-height: 300%;
-      
-        &__input-box{
-          background-color: white;
-          height: 50px;
-          padding: 0 10px 0;
-          font-size: 16px;
-          color: #434A54;
-          position: relative;
-          width: 100%;
-
-          &__image{
-            font-size: 1.3rem;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            float: right;
-            .fa{
-              display: inline-block;
-              font-size: inherit;
-              text-rendering: auto;
-              color: black;
-              
-            }
-          }
+        width: calc(100% - 150px);
+      }
+      &__mask {
+        background-color: $white;
+        float: left;
+        height: 50px;
+        padding-right: 10px;
+        &__image {
+          font-size: 20px;
+          line-height: 50px;
         }
-        &__submit-btn{
-          width: 100px;
-          height: 50px;
-          text-align: center;
-          padding: 0 30px;
-          margin-left: 15px;
-          background-color: #38aef0;
-          color: white;
-          cursor: pointer;
-          
+        .hidden {
+          display: none;
         }
+      }
+      &__submit {
+        background-color: $light_blue;
+        border: none;
+        color: $white;
+        float: right;
+        font-size: 16px;
+        height: 50px;
+        margin-left: 15px;
+        padding: 0 30px;
       }
     }
   }
