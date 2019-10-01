@@ -6,30 +6,27 @@
     .chat-main__header
       .chat-main__header__left-box
         .chat-main__header__left-box__current-group
-          一宮興道
+          グループ名
         .chat-main__header__left-box__member-list
-          Member : morikawa
-          .chat-main__header__left-box__member-list__member 
+          Member :
+          %li.member
+            メンバー名
+          %li.member
+            メンバー名
+          %li.member
+            メンバー名
+
       .chat-main__header__left-box__main-header
         %a.chat-main__header__left-box__main-header__edit-btn
           Edit
       
     .chat-main__messages
-      .chat-main__messages__message
-        .chat-main__messages__message__upper-info
-          %p.chat-main__messages__message__upper-info__talker
-            あああ
-          %p.chat-main__messages__message__upper-info__date
-            2019/09/21(Sat) 09:20:30
-        .chat-main__messages__message__text
-          なんくる
-    .chat-main__form
-      .chat-main__form__new-message
-        .chat-main__form__new-message__input-box
-          type a message
-          %a.chat-main__form_
-          %label.chat-main__form__new-message__input-box__image
-            =link_to "https://di-v.co.jp", class: "contents__btn" do
-              = fa_icon "image"
-        .chat-main__form__new-message__submit-btn
-          Send
+      = render @messages
+    .form
+      = form_for [@group, @message] do |f|
+        = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+        .form__mask
+          = f.label :image, class: 'form__mask__image' do
+            = fa_icon 'picture-o', class: 'icon'
+            = f.file_field :image, class: 'hidden'
+        = f.submit 'Send', class: 'form__submit'
