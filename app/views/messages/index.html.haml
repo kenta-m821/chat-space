@@ -6,19 +6,16 @@
     .chat-main__header
       .chat-main__header__left-box
         .chat-main__header__left-box__current-group
-          グループ名
+          = @group.name
         .chat-main__header__left-box__member-list
           Member :
+        - @group.users.each do |user|
+          %ul
           %li.member
-            メンバー名
-          %li.member
-            メンバー名
-          %li.member
-            メンバー名
+            = user.name
 
-      .chat-main__header__left-box__main-header
-        %a.chat-main__header__left-box__main-header__edit-btn
-          Edit
+      .chat-main__header__left-box__edit-btn
+        = link_to "Edit", edit_group_path(@group.id), class: 'get'
       
     .chat-main__messages
       = render @messages
