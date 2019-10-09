@@ -29,8 +29,19 @@ a {
         &__member-list{
           color: #999999;
           font-size: 12px;
+          display: flex;
+          
+
+          &__member{
+            color: #999999;
+            font-size: 12px;
+            float: right;
+            display: flex;
+            padding-left: 5px;
+          }
         }
       }
+      
 
       &__left-box__edit-btn{
         color: #38aef0;

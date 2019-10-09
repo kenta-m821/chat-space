@@ -9,10 +9,11 @@
           = @group.name
         .chat-main__header__left-box__member-list
           Member :
-        - @group.users.each do |user|
-          %ul
-          %li.member
-            = user.name
+          .chat-main__header__left-box__member-list__member
+            - @group.users.each do |user|
+              %ul
+                %li
+                  = user.name
 
       .chat-main__header__left-box__edit-btn
         = link_to "Edit", edit_group_path(@group.id), class: 'get'
