@@ -1,8 +1,8 @@
 $(function(){
   function buildHTML(message){
     var content = message.content ? `${ message.content }` : "";
-    var img = message.image ? `<img src= ${ message.image }>` : "";
-    var html = `<div class="chat-main__messages__message" data-id="${message.id}">
+    var img = message.image ? `<img src= "${message.image}">` : "";
+    var html = `<div class="chat-main__messages__message" data-message-id="${message.id}">
                   <div class="chat-main__messages__message__upper-info">
                     <p class="chat-main__messages__message__upper-info__talker">
                       ${message.user_name}
@@ -14,18 +14,25 @@ $(function(){
                   <div class="chat-main__messages__message__text">
                     <p class="lower-message__content">
                       ${content}
+                    </p>
                     <div class="lower-message__image">
                       ${img}
-                  </p>
+                    </div>
+                  </div>
                 </div>`
   return html;
   }
+
+  function scroll() {
+
+    window.scroll(0,$(document).height());	    window.scroll(0,$(document).height());
+  }	
+
   $('#new_message').on('submit', function(e){
     e.preventDefault();
     var formData = new FormData(this);
-    var url = $(this).attr('action')
     $.ajax({
-      url: url,
+      url: window.location.href,
       type: "POST",
       data: formData,
       dataType: 'json',
@@ -47,4 +54,29 @@ $(function(){
       $('.submit-btn').prop('disabled', false);　//ここで解除している
     })
   })
+  // 自動更新 
+  var reloadMessages = function () {
+    var last_message_id = $('.timeline__bodyList').last().data('id');
+    $.ajax({
+    url: 'api/messages',
+    type: 'GET',
+    data:{id: last_message_id},
+    dataType: 'json'
+    })
+
+    .done(function(messages){
+      messages.forEach(function(message){
+        var insertHTML = buildHTML(message)
+        $('#message').append(insertHTML)
+      });
+      $('.chat-main__messages').animate({
+        scrollTop: $('.chat-main__messages')[0].scrollHeight
+      }, 'fast');
+    })
+
+    .fail(function(){
+      alert('error');
+    });
+  };
+  setInterval(reloadMessages, 5000);
 })
