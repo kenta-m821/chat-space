@@ -57,27 +57,29 @@ $(function(){
   })
   // 自動更新 
   var reloadMessages = function () {
-    var last_message_id = $('.timeline__bodyList').last().data('id');
-    $.ajax({
-    url: 'api/messages',
-    type: 'GET',
-    data:{id: last_message_id},
-    dataType: 'json'
-    })
+    if (location.href.match(/\/groups\/\d+\/messages/)){
+      var last_message_id = $('.timeline__bodyList').last().data('id');
+      $.ajax({
+        url: 'api/messages',
+        type: 'GET',
+        data:{id: last_message_id},
+        dataType: 'json'
+      })
 
-    .done(function(messages){
-      messages.forEach(function(message){
-        var insertHTML = buildHTML(message)
-        $('#message').append(insertHTML)
+      .done(function(messages){
+        messages.forEach(function(message){
+          var insertHTML = buildHTML(message)
+          $('#message').append(insertHTML)
+        });
+        $('.chat-main__messages').animate({
+          scrollTop: $('.chat-main__messages')[0].scrollHeight
+        }, 'fast');
+      })
+
+      .fail(function(){
+        alert('error');
       });
-      $('.chat-main__messages').animate({
-        scrollTop: $('.chat-main__messages')[0].scrollHeight
-      }, 'fast');
-    })
-
-    .fail(function(){
-      alert('error');
-    });
+    };
   };
   setInterval(reloadMessages, 5000);
 })
