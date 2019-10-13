@@ -1,8 +1,8 @@
-$(document).on("turbolinks:load", function(){
+$(function(){
   function buildHTML(message){
     var content = message.content ? `${ message.content }` : "";
     var img = message.image ? `<img src= "${message.image}">` : "";
-    var html = `<div class="chat-main__messages__message" data-message-id="${message.id}">
+    var html = `<div class="chat-main__messages__message" data-id="${message.id}">
                   <div class="chat-main__messages__message__upper-info">
                     <p class="chat-main__messages__message__upper-info__talker">
                       ${message.user_name}
@@ -58,12 +58,12 @@ $(document).on("turbolinks:load", function(){
   // 自動更新 
   var reloadMessages = function () {
     if (window.location.href.match(/\/groups\/\d+\/messages/)){
-      var last_message_id = $('.chat-main__messages__message:last').data('message-id');
+      var last_message_id = $('.chat-main__messages__message:last').data('id');
       console.log(last_message_id);
       $.ajax({
         url: 'api/messages',
         type: 'GET',
-        data:{id: last_message_id},
+        data:{last_message_id: last_message_id},
         dataType: 'json'
       })
 
