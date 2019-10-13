@@ -57,7 +57,7 @@ $(document).on("turbolinks:load", function(){
   })
   // 自動更新 
   var reloadMessages = function () {
-    if (location.href.match(/\/groups\/\d+\/messages/)){
+    if (window.location.href.match(/\/groups\/\d+\/messages/)){
       var last_message_id = $('.timeline__bodyList').last().data('id');
       $.ajax({
         url: 'api/messages',
