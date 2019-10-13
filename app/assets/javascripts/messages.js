@@ -58,7 +58,7 @@ $(document).on("turbolinks:load", function(){
   // 自動更新 
   var reloadMessages = function () {
     if (window.location.href.match(/\/groups\/\d+\/messages/)){
-      var last_message_id = $('.timeline__bodyList').last().data('message-id');
+      var last_message_id = $('.chat-main__messages:last').data('message-id');
       console.log(last_message_id);
       $.ajax({
         url: 'api/messages',
