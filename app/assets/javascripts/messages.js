@@ -46,6 +46,7 @@ $(function(){
       $('.chat-main__messages').animate({
         scrollTop: $('.chat-main__messages')[0].scrollHeight
       }, 'fast');
+      $('.form__submit').prop('disabled', false);
     })
     .fail(function(){
       alert('エラーが発生したためメッセージは送信できませんでした。');
