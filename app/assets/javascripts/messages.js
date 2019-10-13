@@ -1,4 +1,4 @@
-$(function(){
+$(document).on("turbolinks:load", function(){
   function buildHTML(message){
     var content = message.content ? `${ message.content }` : "";
     var img = message.image ? `<img src= "${message.image}">` : "";
@@ -52,7 +52,7 @@ $(function(){
       alert('エラーが発生したためメッセージは送信できませんでした。');
     })
     .always(function(){
-      $('.submit-btn').prop('disabled', false);　//ここで解除している
+      $('.submit-btn').prop('disabled', false);//ここで解除している
     })
   })
   // 自動更新 
@@ -82,4 +82,4 @@ $(function(){
     };
   };
   setInterval(reloadMessages, 5000);
-})
+});
