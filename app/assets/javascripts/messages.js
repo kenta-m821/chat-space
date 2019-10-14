@@ -2,7 +2,7 @@ $(function(){
   function buildHTML(message){
     var content = message.content ? `${ message.content }` : "";
     var img = message.image ? `<img src= "${message.image}">` : "";
-    var html = `<div class="chat-main__messages__message" data-id="${message.id}">
+    var html = `<div class="chat-main__messages__message" data-message-id="${message.id}">
                   <div class="chat-main__messages__message__upper-info">
                     <p class="chat-main__messages__message__upper-info__talker">
                       ${message.user_name}
@@ -43,43 +43,40 @@ $(function(){
       var html = buildHTML(data);
       $('.chat-main__messages').append(html);
       $('#new_message')[0].reset();
-      
       $('.chat-main__messages').animate({
         scrollTop: $('.chat-main__messages')[0].scrollHeight
       }, 'fast');
-      $('.form__submit').prop('disabled', false);
     })
     .fail(function(){
       alert('エラーが発生したためメッセージは送信できませんでした。');
     })
     .always(function(){
-      $('.submit-btn').prop('disabled', false);//ここで解除している
+      $('.submit-btn').prop('disabled', false);　//ここで解除している
     })
   })
   // 自動更新 
   var reloadMessages = function () {
-    if (window.location.href.match(/\/groups\/\d+\/messages/)){
-      var last_message_id = $('.chat-main__messages__message:last').data('id');
-      $.ajax({
-        url: 'api/messages',
-        type: 'GET',
-        data:{last_message_id: last_message_id},
-        dataType: 'json'
-      })
-      .done(function(messages){
-        messages.forEach(function(message){
-          var insertHTML = buildHTML(message)
-          $('#message').append(insertHTML)
-        });
-        
-        $('.chat-main__messages').animate({
-          scrollTop: $('.chat-main__messages')[0].scrollHeight
-        }, 'fast');
-      })
-      .fail(function(){
-        alert('error');
+    var last_message_id = $('.timeline__bodyList').last().data('id');
+    $.ajax({
+    url: 'api/messages',
+    type: 'GET',
+    data:{id: last_message_id},
+    dataType: 'json'
+    })
+
+    .done(function(messages){
+      messages.forEach(function(message){
+        var insertHTML = buildHTML(message)
+        $('#message').append(insertHTML)
       });
-    };
+      $('.chat-main__messages').animate({
+        scrollTop: $('.chat-main__messages')[0].scrollHeight
+      }, 'fast');
+    })
+
+    .fail(function(){
+      alert('error');
+    });
   };
   setInterval(reloadMessages, 5000);
-});
+})
