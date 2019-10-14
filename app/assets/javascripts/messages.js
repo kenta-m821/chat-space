@@ -60,25 +60,21 @@ $(function(){
   var reloadMessages = function () {
     if (window.location.href.match(/\/groups\/\d+\/messages/)){
       var last_message_id = $('.chat-main__messages__message:last').data('id');
-      console.log(last_message_id);
       $.ajax({
         url: 'api/messages',
         type: 'GET',
         data:{last_message_id: last_message_id},
         dataType: 'json'
       })
-
       .done(function(messages){
         messages.forEach(function(message){
           var insertHTML = buildHTML(message)
           $('#message').append(insertHTML)
         });
-        console.log(message);
         $('.chat-main__messages').animate({
           scrollTop: $('.chat-main__messages')[0].scrollHeight
         }, 'fast');
       })
-
       .fail(function(){
         alert('error');
       });
