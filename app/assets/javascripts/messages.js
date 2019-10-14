@@ -43,6 +43,7 @@ $(function(){
       var html = buildHTML(data);
       $('.chat-main__messages').append(html);
       $('#new_message')[0].reset();
+      
       $('.chat-main__messages').animate({
         scrollTop: $('.chat-main__messages')[0].scrollHeight
       }, 'fast');
@@ -72,6 +73,7 @@ $(function(){
           var insertHTML = buildHTML(message)
           $('#message').append(insertHTML)
         });
+        console.log(message);
         $('.chat-main__messages').animate({
           scrollTop: $('.chat-main__messages')[0].scrollHeight
         }, 'fast');
