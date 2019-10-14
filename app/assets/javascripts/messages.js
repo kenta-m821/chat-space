@@ -51,12 +51,13 @@ $(function(){
       alert('エラーが発生したためメッセージは送信できませんでした。');
     })
     .always(function(){
-      $('.submit-btn').prop('disabled', false);　//ここで解除している
+      $('.form__submit').prop('disabled', false);//ここで解除している
     })
   })
   // 自動更新 
   var reloadMessages = function () {
-    var last_message_id = $('.timeline__bodyList').last().data('id');
+    var last_message_id = $('.chat-main__messages__message:last').last().data('id');
+    console.log(last_message_id);
     $.ajax({
     url: 'api/messages',
     type: 'GET',
