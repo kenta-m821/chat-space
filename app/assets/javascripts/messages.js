@@ -71,6 +71,7 @@ $(function(){
           var insertHTML = buildHTML(message)
           $('#message').append(insertHTML)
         });
+        
         $('.chat-main__messages').animate({
           scrollTop: $('.chat-main__messages')[0].scrollHeight
         }, 'fast');
